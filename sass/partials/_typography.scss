@@ -1,20 +1,15 @@
+// 06 organization
+
+// 04 create a serif and sans-serif font
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
 @import url(http://fonts.googleapis.com/css?family=Lato);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
 @import url(http://fonts.googleapis.com/css?family=Merriweather);
 @import url(http://fonts.googleapis.com/css?family=Vollkorn);
 @import url(http://fonts.googleapis.com/css?family=Old+Standard+TT);
-/* line 5, ../sass/partials/_extendables.scss */
-h1, h2, h3 {
-  font-family: "Merriweather", "Vollkorn", "Old Standard TT", serif;
-}
 
-/* line 9, ../sass/partials/_extendables.scss */
-h4, h5, h6, p {
-  font-family: "Lato", "Open Sans", "Ubuntu", sans-serif;
-}
+$sansStack: 'Lato', 'Open Sans', 'Ubuntu', sans-serif;
+$serifStack: 'Merriweather', 'Vollkorn', 'Old Standard TT', serif;
 
-/* line 13, ../sass/partials/_extendables.scss */
-h2, h3, h4 {
-  color: #aa6e18;
-}
+

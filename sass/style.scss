@@ -1,33 +1,6 @@
-// 04 create a serif and sans-serif font
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
-@import url(http://fonts.googleapis.com/css?family=Lato);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
-
-@import url(http://fonts.googleapis.com/css?family=Merriweather);
-@import url(http://fonts.googleapis.com/css?family=Vollkorn);
-@import url(http://fonts.googleapis.com/css?family=Old+Standard+TT);
-
-$sansStack: 'Lato', 'Open Sans', 'Ubuntu', sans-serif;
-$serifStack: 'Merriweather', 'Vollkorn', 'Old Standard TT', serif;
-
-// 04 choose primary, secondary, and tertiary colors, and make your h1 your primary
-$primaryColor: #544F60;
-$secondaryColor: #AA6E18;
-$tertiaryColor: #1E1C09;
-
-// 05 headers & paragraphs
-
-%serif {
-  font-family: $serifStack;
-}
-
-%sans {
-  font-family: $sansStack;
-}
-
-%secondaryColor {
-  color:$secondaryColor;
-}
+@import "partials/colors";
+@import "partials/typography";
+@import "partials/extendables";
 
 h1, h2, h3 {
   @extend %serif;
