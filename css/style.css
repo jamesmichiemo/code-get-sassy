@@ -1,4 +1,11 @@
-/* line 1, ../sass/style.scss */
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Merriweather);
+@import url(http://fonts.googleapis.com/css?family=Vollkorn);
+@import url(http://fonts.googleapis.com/css?family=Old+Standard+TT);
+/* line 19, ../sass/style.scss */
 h1 {
-  color: red;
+  font-family: "Lato", "Open Sans", "Ubuntu", sans-serif;
+  color: #544f60;
 }
