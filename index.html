@@ -7,5 +7,388 @@
   </head>
   <body>
     <h1>Welcome to the Sass Training!</h1>
+      <h2>Sass</h2>
+        <h3>What is Sass?</h3>
+          <p>Sass is a language construct to create CSS. It makes writing awesome css easier. sass-lang.com</p>
+          <h4>Sass has TWO syntaxes</h4>
+            <p>.sass and .scss</p>
+            <h5>.sass</h5>
+            <p>whitespace sensitive</p>
+            <h5>.scss</h5>
+            <p>superset of css</p>
+        <h3>Why .scss?</h3>
+          <h4>Tech reasons</h4>
+            <ul>
+              <li>Easier to understand if you know CSS</li>
+              <li>Easier to integrate in the real-world</li>
+            </ul>
+          <h4>Team reasons</h4>
+            <ul>
+              <li>Helps onboard CSS-savvy teammates</li>
+              <li>SCSS allows you to convert a project piece by piece even in-progress</li>
+            </ul>
+        <h3>Compass</h3>
+          <h4>What is Compass?</h4>
+            <p>Compass is a framework built around Sass, enhancing Sass in two main areas</p>
+            <ul>
+              <li>Extension framework for sharing and using code</li>
+              <li>Sass Framework for assisting with cross-browser compatibility and development needs</li>
+            </ul>
+          <h4>config.rb</h4>
+            <p>The core of a compass project is the config.rb file, which lives at the root of your working directory</p>
+            <ul>
+              <li>Provides a pseudo asset pipeline so Compass knows where your different file types should live</li>
+              <li>Compilation options for Compass</li>
+              <li>Extension requires for including Compass extenstions</li>
+            </ul>
+            <h5>Compiling</h5>
+              <p>Compiling with Compass can be done in one of two ways</p>
+              <ul>
+                <li><b>compass compile</b> One-off compile of your Sass files</li>
+                <li><b>compass watch</b> Listener for changes to Sass files; will trigger a recompile with each change</li>
+              </ul>
+          <h4>Dependency Management</h4>
+            <p>Sass and Compass are Ruby projects, so you need to have Ruby installed.</p>
+            <p>Handling Ruby dependencies is easy with Bundler.</p>
+            <p>When working on different computers, developers, or even projects, there will always be an issue with ruby gems changing between different versions.</p>
+            <p>We want to make sure that we know which versions of each gem we are using to prevent compiling differences and errors. Bundler allows us to do just that. But first, we need to make sure we have Bundler installed:</p>
+            <h5>Install</h5>
+              <pre><code>gem install bundler</code></pre>
+              <p>The Gemfile that comes with the project will tell Bundler exactly what versions of what gems to use. Use the following command to install your gem dependencies and create a Gemfile.lock to lock each gem to the correct version.</p>
+              <pre><code>bundle install</code></pre>
+              <h5>Commands</h5>
+                <h6>compass watch/compass compile</h6>
+                  <p>From now on, instead of running "compass watch" or "compass compile" you use:</p>
+                  <pre><code>bundle exec compass watch</code></pre>
+                  <p>And Bundler will only use the gem versions selected within the lock file</p>
+        <h3>Sass Basics</h3>
+          <p>Sass makes maintaining pre-compiled CSS easier by extending pre-compiled CSS in 3 useful ways:</p>
+          <ul>
+            <li>Variables</li>
+            <li>Selector</li>
+            <li>Selector Extension and Placeholder Selectors</li>
+          </ul>
+          <h4>Variables</h4>
+            <p>Variables in Sass begin with a $ and can store any single value(i.e. noproperties, just values)</p>
+            <pre><code>
+$color: #c0ffee; // rgb(a) and hsl(a) work as well
+$string: 'Hello World';
+$number: 1000px; // With or without unit
+$list: 'alpha' 'beta', 'gamma' 'delta';
+$booleans: true;
+$nulls: null;
+$maps: (where: waldo, garfield: lasagna);
+Sass 3.3+
+            </code></pre>
+            <p>Variables can be used as values in properties or other variables and as inputs in functions and mixins</p>
+            <pre><code>
+$red: #fc2c3a;
+$primary-color: $red;
+.foo {
+  color: $primary-color;
+  background: mix(black, $primary-color, 25%);
+}
+            </code></pre>
+            <pre><code>
+.foo {
+  color: #fc2v3a;
+  background: #bd212b;
+}
+            </code></pre>
+            <p>Variables can also be interpolated into strings, selectors, or properties</p>
+            <pre><code>
+$greeting-class: 'welcome';
+$greeting: 'Aloha';
+
+.#{$greeting-class}:before {
+  content: '#{$greeting} from Universal Studios';
+}
+            </code></pre>
+            <pre><code>
+
+.welcome:before {
+  content: "Aloha from Universal Studios";
+}
+            </code></pre>
+          <h4>Getting Started</h4>
+            <p>One of the most common ways to get started with Sass is to take an existing CSS project, move it into your Sass directory, change it to a .scss file, then convert colors and font stacks to variables</p>
+            <pre><code>
+body {
+  background: #333;
+  color: #eee;
+  font-family: 'Papyrus' 'Comic Sans' 'Helvetica' sans-serif;
+}
+
+h1 {
+  font-family: 'Times New Roman' serif;
+}
+            </code></pre>
+            <pre><code>
+$background-color: #333;
+$font-color: #eee;
+
+$font-sans: 'Papyrus' 'Comic Sans' 'Helvetica' sans-serif;
+$font-serif: 'Times New Roman' serif;
+
+body {
+  background: $background-color;
+  color: $font-color;
+  font-family: $font-sans;
+}
+
+h1 {
+  font-family; $font-serif;
+}
+            </code></pre>
+          <h4>Selector Nesting</h4>
+            <p>Sass allows you to nest selectors inside each other to create compound selector chains.</p>
+            <p>A common mistake is to use nesting to make your selector chain look like your DOM structure: DON'T DO THAT!</p>
+            <p>We like to use the Inception rule: never go more than 3 levels deep!</p>
+            <p></p>
+            <pre><code>
+.navigation {
+  background: black;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    color: white;
+  }
+}
+            </code></pre>
+            <pre><code>
+.navigation {
+  background: black;
+}
+.navigation li {
+    display: inline-block;
+}
+.navigation a {
+    color: white;
+}
+            </code></pre>
+            <pre><code>
+.navigation {
+  background: black;
+
+  ul {
+    li {
+      display: inline-block;
+
+      a {
+        color: white;
+      }
+    }
+  }
+}
+.navigation a {
+    color: white;
+}
+            </code></pre>
+            <pre><code>
+.navigation {
+  background: black;
+}
+.navigation  ul li {
+  display: inline-block;
+}
+.navigation ul li a {
+  color: white;
+}
+            </code></pre>
+            <p>When nesting, we can control where our nested selector gets placed thanks to the wonderful, magical ampersand &</p>
+            <p>Placing the & adjacent to your selector will attach it directly to its parent, and putting it after will place it before its parent</p>
+            <pre><code>
+a {
+  color: blue;
+  text-decoration: underline;
+  &:hover {
+    color: mix(white, blue, 25%);
+    text-decoration: none;
+  }
+}
+.logo {
+  .svg & {
+    background-image: url('../img/logo.png');
+  }
+}
+            </code></pre> <pre><code>
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:hover {
+    color: #3f3fff;
+    text-decoration: none;
+}
+
+.svg .logo {
+  background-image: url('../img/logo.png');
+}
+.no-svg .logo {
+  background-image: url('../img/logo.png');
+}
+            </code></pre>
+            <p>With the introduction of Sass 3.3, we now have more control over how to construct and place selectors with @at-root and #{&}</p>
+            <ul>
+              <li>@at-root Places encapsulated code at the root of the document</li>
+              <li>#{&} Interpolates the current parent selector
+            </ul>
+            <pre><code>
+.message {
+  color:white;
+
+  #{&}--link {
+    color: blue;
+  }
+
+  @at-root #{&}--status {
+    background: green;
+  }
+
+  @at-root #{&}--error {
+    background: red;
+  }
+}
+            </code></pre>
+            <pre><code>
+.message {
+  color:white;
+}
+.message .message--link {
+    color: blue;
+}
+.message--status {{
+    background: green;
+}
+.message--error {
+    background: red;
+}
+            </code></pre>
+          <h4>Selector Extension and Placeholder Selectors</h4>
+            <p>Sass introduces the concept of selector extension as a way of specifying that a selector inherits the properties of another selector.</p>
+            <p>This inheritance takes place in CSS by comma-separating the selectors in the output CSS</p>
+            <p><b>WARNING:</b> If not used with forethought, extension can bloat your output CSS</p>
+            <pre><code>
+.message {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.message--status
+  @extend .message;
+  background-color: green;
+}
+.message--error {
+  @extend .message;
+  background-color: red;
+}
+            </code></pre>
+            <pre><code>
+.message, .message--status, .message-error {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.message--status
+  background-color: green;
+}
+.message--error {
+  background-color: red;
+}
+            </code></pre>
+            <pre><code>
+a {
+  color: blue;
+  text-decoration: underline;
+
+  nav & {
+    color: white;
+    text-decoration: none;
+  }
+
+  #very-specific & {
+    color: green;
+  }
+}
+
+.bad-extensions {
+  @extend a;
+}
+            </code></pre>
+            <pre><code>
+a {
+  color: blue;
+  text-decoration: underline;
+
+  nav & {
+    color: white;
+    text-decoration: none;
+  }
+
+  #very-specific & {
+    color: green;
+  }
+}
+
+.bad-extensions {
+  @extend a;
+}
+            </code></pre>
+            <pre><code>
+a, .bad-extensions {
+  color: blue;
+  text-decoration: underline;
+}
+
+nav a, nav .bad-extensions {
+    color: white;
+    text-decoration: none;
+}
+
+#very-specific a, #very-specific .bad-extensions {
+    color: green;
+}
+
+            </code></pre>
+            <h5>Placeholder Selectors</h5>
+            <p>Placeholder Selectors give us fine-grain control over using @extend by providing a silent class to extend from</p>
+            <p>Placeholder selectors inherit the name of the first selector to extend them, reducing our total output and ensuring we're extending only what we want to</p>
+            <p>Placeholder selectors begin with a %</p>
+            <pre><code>
+%message {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.message--status {
+  @extend %message;
+  background-color: green;
+}
+.message--error {
+  @extend %message;
+  background-color: red;
+}
+            </code></pre>
+            <pre><code>
+message--status, .message-error {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.message--status {
+  background-color: green;
+}
+.message--error {
+  background-color: red;
+}
+            </code></pre>
+
+
+
+
+
   </body>
 </html>

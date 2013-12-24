@@ -8,15 +8,37 @@
 @import url(http://fonts.googleapis.com/css?family=Old+Standard+TT);
 
 $sansStack: 'Lato', 'Open Sans', 'Ubuntu', sans-serif;
-$serifStack: 'Merriweather' 'Vollkorn' 'Old Standard TT' serif;
+$serifStack: 'Merriweather', 'Vollkorn', 'Old Standard TT', serif;
 
 // 04 choose primary, secondary, and tertiary colors, and make your h1 your primary
 $primaryColor: #544F60;
 $secondaryColor: #AA6E18;
 $tertiaryColor: #1E1C09;
 
+// 05 headers & paragraphs
 
-h1 {
-  font-family: $sansStack;
-  color: $primaryColor;
+%serif {
+  font-family: $serifStack;
 }
+
+%sans {
+  font-family: $sansStack;
+}
+
+%secondaryColor {
+  color:$secondaryColor;
+}
+
+h1, h2, h3 {
+  @extend %serif;
+}
+
+h4, h5, h6, p {
+  @extend %sans;
+}
+
+h2, h3, h4 {
+  @extend %secondaryColor;
+}
+
+

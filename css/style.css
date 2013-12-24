@@ -4,8 +4,17 @@
 @import url(http://fonts.googleapis.com/css?family=Merriweather);
 @import url(http://fonts.googleapis.com/css?family=Vollkorn);
 @import url(http://fonts.googleapis.com/css?family=Old+Standard+TT);
-/* line 19, ../sass/style.scss */
-h1 {
+/* line 20, ../sass/style.scss */
+h1, h2, h3 {
+  font-family: "Merriweather", "Vollkorn", "Old Standard TT", serif;
+}
+
+/* line 24, ../sass/style.scss */
+h4, h5, h6, p {
   font-family: "Lato", "Open Sans", "Ubuntu", sans-serif;
-  color: #544f60;
+}
+
+/* line 28, ../sass/style.scss */
+h2, h3, h4 {
+  color: #aa6e18;
 }
