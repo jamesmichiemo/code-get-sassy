@@ -7,6 +7,8 @@
   </head>
   <body>
     <h1>Welcome to the Sass Training!</h1>
+    <button>primary</button>
+    <button>secondary</button>
       <h2>Sass</h2>
         <h3>What is Sass?</h3>
           <p>Sass is a language construct to create CSS. It makes writing awesome css easier. sass-lang.com</p>
@@ -385,10 +387,191 @@ message--status, .message-error {
   background-color: red;
 }
             </code></pre>
+        <h3>Sass Constructs</h3>
+          <p>Sass has two main constructs to assist in writing CSS</p>
+          <ul>
+            <li>Functions</li>
+            <li>Mixins</li>
+          </ul>
+          <h4>Functions</h4>
+            <p>Functions provide a way for you to process information and @return a single variable</p>
+            <p>Functions require a @return, and can return any data type that can be stored as a variable</p>
+            <p>They can take both required or optional arguments</p>
+            <pre><code>
+@function greeting($phrase, $place: 'Islands of Adventure') {
+  $message: $phrase + ' from ' + $place;
+  @return $message;
+}
 
+.hello--spanish {
+  content: greeting('Hola');
+}
+.hello--french {
+  content: greeting('Bonjour', 'Universal Studios');
+}
+            </code></pre>
+            <pre><code>
+.hello--spanish {
+  content: "Hola from Islands of Adventure";
+}
+.hello--french {
+  content: "Bonjour from Universal Studios';
+}
+            </code></pre>
+            <p>Functions cannot be called at the root of a document; their results need to be assigned to a variable, a property, or interpolated as a string</p>
+            <p>Sass has a number of very useful built in functions reeady to be used</p>
+            <ul>
+              <li>Color Functions</li>
+              <li>Number Functions</li>
+              <li>String Functions</li>
+              <li>Introspection and Miscellaneous Functions</li>
+              <li>List Functions</li>
+              <li>Map Functions</li>
+            </ul>
+            <h3>Select Color Functions</h3>
+              <ul>
+                <li><b>mix($color-1, $color-2, [$weight])</b> - Mixes two colors together</li>
+                <li><b>complement($color)</b> - Returns the complement of a color</li>
+                <li><b>rgba($color, $alpha)</b> - Changes the alpha component for a color. Color can be passed in as any valid color format.</li>
+                <li><b>red($color), green($color), blue($color), hue($color), saturation($color), lightness($color)</b> - Returns relevant components of a color on the rgb/hsl scale</li>
+              </ul>
+            <h3>Number Functions</h3>
+              <ul>
+                <li><b>percentage($value)</b> - Converts a unitless number to a percentage</li>
+                <li><b>abs($value)</b> - Returns the absolute value of a number</li>
+                <li><b>round($value), floor($value), ceil($value)</b> - Rounds a number to the nearest whole number</li>
+                <li><b>min($numbers...), max($numbers...)</b> - Finds the min/max of several numbers</li>
 
+              </ul>
+            <h3>String Functions</h3>
+              <ul>
+                <li><b>str-length($string)</b> - Returns the number of characters in a string</li>
+                <li><b>str-insert($original, $insert, $index)</b> - Inserts one string into another at a given point. An index of 0 will insert it at the beginning of the string  </li>
+                <li><b>str-index($string, $substring)</b> - Returns the index of the first occurrence of the substring. Returns 0 if substring doesn't exist, 1 if it's the first string</li>
+                <li><b>str-slice($string, $start-at, [$end-at])</b> - Extracts a substring from the input string</li>
+                <li><b>to-upper-case($string), to-lower-case($string)</b>- Transforms string to upper/lower case</li>
 
+              </ul>
+            <h3>Introspection & Miscellaneous Functions</h3>
+              <ul>
+                <li><b>type-of($value)</b> - Returns the primitive data type of the value</li>
+                <li><b>unit($number)</b> - Returns the unit(s) whether a number has units</li>
+                <li><b>unitless($number)</b> - Returns whether a number has units</li>
+                <li><b>comparable($number-1, $number-2)</b> - Returns whether two numbers can be added, subtracted, or compared</li>
+                <li><b>if($condition, $if-true, $if-false)</b>- Returns one of two values, depending on whether or not the condition is true</li>
 
+              </ul>
+            <h3>Introspection & Miscellaneous Functions</h3>
+              <ul>
+                <li><b>length($list)</b> - Returns the length of a list(or number of pairs in a map)</li>
+                <li><b>nth($list, $n)</b> - Returns the nth item in a list/map. Sass starts counting at 1, not 0.</li>
+                <li><b>join($list1, $list2, $separator)</b> - Joins two lists together. The separator can either be a comma or a space</li>
+                <li><b>append($list, $val, $separator)</b> - Appends a single value onto the end of a list</li>
+                <li><b>zip($list...)</b>- Combines several lists into a single multidimensional list</li>
+                <li><b>index($list, $value)</b> - Returns the position of a value within a list. If the value isn't found, returns false</li>
+                <li><b>list-separator($list)</b> - Returns the separator of a list</li>
+              </ul>
+             <h3>Map Functions</h3>
+              <ul>
+                <li><b>map-get($map, $key)</b> - Returns the value in map associated with the given key. If the map doesn't have such a key, returns null</li>
+                <li><b>map-merge($map1, $map2)</b> - Merges two maps together into a new map. Keys in Map 2 will take precedence over keys in Map 1. Keys will return in the order they appear in Map 1 with additional keys from Map 2 appended to the end</li>
+                <li><b>map-keys($map)</b> - Returns a list of all keys in the map</li>
+                <li><b>map-values($map)</b> - Returns a list of all values in a map. This list may include duplicates if multiple keys have the same value.</li>
+                <li><b>map-has-key($map, $key)</b>- Returns whether a map has a value associated with a given key</li>
+              </ul>
+
+          <h4>Mixins</h4>
+            <p>Mixins are similar to functions, except that instead of returning a single value, they return Sass</p>
+            <p>Mixins can be used at the root element or within selectors</p>
+            <p>The best mixins only write properties that change based on user input and don't needlessly duplicate properties</p>
+            <pre><code>
+@mixin greeting($phrase, $place: 'Islands of Adventure', $color: #96360f) {
+  content: $phrase + ' from ' + $place;
+  background: $color;
+  color: invert($color);
+}
+
+.hello--spanish {
+  @include greeting('Hola');
+}
+.hello--french {
+  @include greeting('Bonjour', 'Universal Studios', #1875b4);
+}
+            </code></pre>
+            <pre><code>
+.hello--spanish {
+  content: "Hola from Islands of Adventure";
+  background: #96360f;
+  color: #69c9f0;
+}
+.hello--french {
+  content: "Bonjour from Universal Studios";
+  background: #1875b4;
+  color: #e78a4b;
+}
+            </code></pre>
+            <pre><code>
+@mixin greeting($phrase, $place: 'Islands of Adventure') {
+  $color: #96360f;
+  content: $phrase + ' from ' + $place;
+  background: $color;
+  color: invert($color);
+}
+
+.hello--spanish {
+  @include greeting('Hola');
+}
+.hello--french {
+  @include greeting('Bonjour', 'Universal Studios');
+}
+            </code></pre>
+            <pre><code>
+.hello--spanish {
+  content: "Hola from Islands of Adventure";
+  background: #96360f;
+  color: #69c9f0;
+}
+
+.hello--french {
+  content: "Bonjour from Universal Studios";
+  background: #1875b4;
+  color: #e78a4b;
+}
+            </code></pre>
+            <p>Mixins can also take blocks of properties from a user</p>
+            <p>These blocks are called @content blocks</p>
+            <pre><code>
+@mixin enhance-with($feature) {
+  .#{$feature} & {
+    @content;
+  }
+}
+
+@mixin degrade-from($feature, $no-js: true) {
+  .no-#{$feature} & {
+    @content;
+  }
+}
+
+.logo {
+  @include enhance-with('svg') {
+    background-image: url('../img/logo.svg');
+  }
+
+  @include degrade-from('svg') {
+    background-image: url('../img/logo.png');
+  }
+}
+            </code></pre>
+            <pre><code>
+.svg .logo {
+  background-image: url("../img/logo.svg");
+}
+
+.no-svg .logo {
+  background-image: url("../img/logo.png");
+}
+            </code></pre>
 
   </body>
 </html>

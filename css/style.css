@@ -18,3 +18,20 @@ h4, h5, h6, p {
 h2, h3, h4 {
   color: #aa6e18;
 }
+
+/* line 32, ../sass/style.scss */
+button {
+  background: #95a5a6;
+  border-radius: 3px;
+  border-style: outset;
+  border-width: px;
+}
+/* line 23, ../sass/style.scss */
+button:active {
+  border-style: inset;
+  background: rgba(149, 165, 166, 0.25);
+}
+/* line 27, ../sass/style.scss */
+button:hover {
+  cursor: pointer;
+}
